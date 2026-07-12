@@ -1,0 +1,866 @@
+@import '../../../theme/variables';
+
+.dashboard {
+  max-width: 100%;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--color-background, #F8FAFC);
+  box-sizing: border-box;
+  overflow-x: hidden;
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-family, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+  padding: 16px 16px 0;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 4px 0;
+}
+
+.header-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 14px;
+  background: var(--color-white, #FFFFFF);
+  box-shadow: var(--shadow-card, 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-primary, #0F172A);
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
+  flex-shrink: 0;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.header-btn:active {
+  transform: scale(0.92);
+  background: var(--color-background-alt, #F1F5F9);
+}
+
+.header-btn .material-icons {
+  font-size: 22px;
+}
+
+.help-btn {
+  background: transparent;
+  box-shadow: none;
+  color: var(--color-text-tertiary, #94A3B8);
+}
+
+.help-btn:active {
+  background: transparent;
+  opacity: 0.6;
+}
+
+.notif-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  min-width: 17px;
+  height: 17px;
+  border-radius: 9px;
+  background: var(--color-danger, #EF4444);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  box-shadow: 0 0 0 2px var(--color-white, #FFFFFF);
+  line-height: 1;
+}
+
+.header-greeting {
+  flex: 1;
+  text-align: center;
+  min-width: 0;
+}
+
+.greeting-title {
+  margin: 0;
+  font-size: clamp(17px, 4.5vw, 20px);
+  font-weight: 700;
+  color: var(--color-text-primary, #0F172A);
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.greeting-sub {
+  margin: 1px 0 0;
+  font-size: clamp(11px, 2.8vw, 13px);
+  color: var(--color-text-tertiary, #94A3B8);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  background: var(--gradient-purple, linear-gradient(135deg, #7C3AED 0%, #A855F7 100%));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.18);
+  flex-shrink: 0;
+}
+
+.next-reservation {
+  display: flex;
+  align-items: stretch;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #7C3AED 0%, #A855F7 50%, #9333EA 100%);
+  box-shadow: 0 8px 32px rgba(124, 58, 237, 0.28);
+  margin-bottom: 20px;
+  min-height: 150px;
+  position: relative;
+}
+
+.next-reservation::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.next-reservation-content {
+  flex: 1;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+.next-res-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.next-res-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.next-res-badge {
+  font-size: 8px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.15);
+  padding: 2px 8px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.next-res-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.next-res-detail {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(12px, 3.2vw, 14px);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.next-res-detail .material-icons {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.6);
+  flex-shrink: 0;
+}
+
+.details-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  padding: 7px 14px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 150ms ease, transform 150ms ease;
+  width: fit-content;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.details-btn:active {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateX(3px);
+}
+
+.details-btn .material-icons {
+  font-size: 14px;
+}
+
+.next-reservation-image {
+  width: clamp(90px, 26vw, 130px);
+  min-height: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.next-reservation-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0 20px 20px 0;
+}
+
+.next-reservation-image::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 30px;
+  background: linear-gradient(to right, #7C3AED, transparent);
+  pointer-events: none;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-primary, #0F172A);
+}
+
+.section-badge {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-tertiary, #94A3B8);
+  background: var(--color-background-alt, #F1F5F9);
+  padding: 4px 10px;
+  border-radius: 9999px;
+  text-transform: capitalize;
+}
+
+.section-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: #7C3AED;
+  text-decoration: none;
+  transition: opacity 150ms ease;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.section-link:active {
+  opacity: 0.7;
+}
+
+.quick-actions-section {
+  margin-bottom: 20px;
+}
+
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  min-width: 0;
+}
+
+.quick-actions-grid ::ng-deep app-quick-action-card {
+  display: block;
+}
+
+.quick-actions-grid ::ng-deep .quick-action-card {
+  padding: 16px 6px;
+  gap: 10px;
+  min-height: 88px;
+  background: var(--color-white, #FFFFFF);
+  border-radius: 18px;
+  box-shadow: var(--shadow-card, 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04));
+  border: 1px solid rgba(0,0,0,0.02);
+}
+
+.quick-actions-grid ::ng-deep .quick-action-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.quick-actions-grid ::ng-deep .quick-action-icon .material-icons {
+  font-size: 22px;
+}
+
+.quick-actions-grid ::ng-deep .quick-action-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-secondary, #475569);
+  text-align: center;
+  line-height: 1.2;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.monthly-summary-section {
+  margin-bottom: 20px;
+}
+
+.monthly-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  min-width: 0;
+}
+
+.monthly-summary-grid ::ng-deep app-stat-card {
+  display: block;
+}
+
+.monthly-summary-grid ::ng-deep .stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 10px;
+  padding: 16px 14px;
+  background: var(--color-white, #FFFFFF);
+  border-radius: 18px;
+  box-shadow: var(--shadow-card, 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04));
+  min-height: 96px;
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+  border: 1px solid rgba(0,0,0,0.02);
+}
+
+.monthly-summary-grid ::ng-deep .stat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.monthly-summary-grid ::ng-deep .stat-icon .material-icons {
+  font-size: 20px;
+}
+
+.monthly-summary-grid ::ng-deep .stat-info {
+  width: 100%;
+}
+
+.monthly-summary-grid ::ng-deep .stat-value {
+  font-size: clamp(18px, 5vw, 22px);
+  font-weight: 800;
+  color: var(--color-text-primary, #0F172A);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.monthly-summary-grid ::ng-deep .stat-label {
+  font-size: 10px;
+  color: var(--color-text-tertiary, #94A3B8);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.upcoming-section {
+  margin-bottom: 20px;
+}
+
+.reservations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.reservations-list ::ng-deep app-reservation-list-item {
+  display: block;
+}
+
+.reservations-list ::ng-deep .reservation-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 14px;
+  background: var(--color-white, #FFFFFF);
+  border-radius: 18px;
+  box-shadow: var(--shadow-card, 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04));
+  text-decoration: none;
+  color: var(--color-text-primary, #0F172A);
+  transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+  border: 1px solid rgba(0,0,0,0.02);
+}
+
+.reservations-list ::ng-deep .reservation-item:active {
+  transform: scale(0.985);
+  background: var(--color-background, #F8FAFC);
+}
+
+.reservations-list ::ng-deep .reservation-item-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--color-background-alt, #F1F5F9);
+}
+
+.reservations-list ::ng-deep .reservation-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.reservations-list ::ng-deep .reservation-item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.reservations-list ::ng-deep .reservation-item-name {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-primary, #0F172A);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.reservations-list ::ng-deep .reservation-item-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.reservations-list ::ng-deep .reservation-item-date,
+.reservations-list ::ng-deep .reservation-item-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--color-text-secondary, #475569);
+}
+
+.reservations-list ::ng-deep .reservation-item-date .material-icons,
+.reservations-list ::ng-deep .reservation-item-time .material-icons {
+  font-size: 13px;
+  color: var(--color-text-tertiary, #94A3B8);
+}
+
+.reservations-list ::ng-deep .reservation-item-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 700;
+  width: fit-content;
+}
+
+.reservations-list ::ng-deep .status-confirmado {
+  background: #D1FAE5;
+  color: #10B981;
+}
+
+.reservations-list ::ng-deep .status-pendiente {
+  background: #FEF3C7;
+  color: #F59E0B;
+}
+
+.reservations-list ::ng-deep .status-reservado {
+  background: #DBEAFE;
+  color: #7C3AED;
+}
+
+.reservations-list ::ng-deep .status-cancelado {
+  background: #FEE2E2;
+  color: #EF4444;
+}
+
+.reservations-list ::ng-deep .status-finalizado {
+  background: #F1F5F9;
+  color: #64748B;
+}
+
+.reservations-list ::ng-deep .reservation-item-arrow {
+  color: var(--color-text-tertiary, #94A3B8);
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.bottom-spacer {
+  height: calc(84px + env(safe-area-inset-bottom, 0));
+}
+
+@media (min-width: 640px) {
+  .dashboard {
+    padding: 20px 20px 0;
+  }
+
+  .dashboard-header {
+    margin-bottom: 24px;
+  }
+
+  .greeting-title {
+    font-size: 20px;
+  }
+
+  .greeting-sub {
+    font-size: 14px;
+  }
+
+  .next-reservation {
+    min-height: 170px;
+    margin-bottom: 24px;
+  }
+
+  .next-reservation-content {
+    padding: 22px 20px;
+    gap: 10px;
+  }
+
+  .next-res-label {
+    font-size: 10px;
+  }
+
+  .next-res-detail {
+    font-size: 14px;
+  }
+
+  .next-reservation-image {
+    width: 160px;
+  }
+
+  .details-btn {
+    padding: 9px 18px;
+    font-size: 12px;
+  }
+
+  .section {
+    margin-bottom: 24px;
+  }
+
+  .section-title {
+    font-size: 18px;
+  }
+
+  .quick-actions-grid {
+    gap: 12px;
+  }
+
+  .quick-actions-grid ::ng-deep .quick-action-card {
+    padding: 20px 12px;
+    min-height: 96px;
+  }
+
+  .quick-actions-grid ::ng-deep .quick-action-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .quick-actions-grid ::ng-deep .quick-action-icon .material-icons {
+    font-size: 24px;
+  }
+
+  .quick-actions-grid ::ng-deep .quick-action-label {
+    font-size: 12px;
+  }
+
+  .monthly-summary-grid ::ng-deep .stat-card {
+    padding: 18px 16px;
+    gap: 12px;
+  }
+
+  .monthly-summary-grid ::ng-deep .stat-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .monthly-summary-grid ::ng-deep .stat-icon .material-icons {
+    font-size: 22px;
+  }
+
+  .monthly-summary-grid ::ng-deep .stat-value {
+    font-size: 24px;
+  }
+
+  .monthly-summary-grid ::ng-deep .stat-label {
+    font-size: 11px;
+  }
+
+  .reservations-list ::ng-deep .reservation-item {
+    padding: 14px 16px;
+    gap: 14px;
+  }
+
+  .reservations-list ::ng-deep .reservation-item-image {
+    width: 54px;
+    height: 54px;
+  }
+
+  .reservations-list ::ng-deep .reservation-item-name {
+    font-size: 15px;
+  }
+
+  .reservations-list ::ng-deep .reservation-item-date,
+  .reservations-list ::ng-deep .reservation-item-time {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 32px 0;
+  }
+
+  .dashboard-header {
+    margin-bottom: 32px;
+  }
+
+  .greeting-title {
+    font-size: 24px;
+  }
+
+  .next-reservation {
+    min-height: 190px;
+  }
+
+  .next-reservation-content {
+    padding: 28px 24px;
+    gap: 12px;
+  }
+
+  .next-res-label {
+    font-size: 11px;
+  }
+
+  .next-res-detail {
+    font-size: 15px;
+  }
+
+  .next-reservation-image {
+    width: 240px;
+  }
+
+  .next-reservation-image::after {
+    width: 50px;
+  }
+
+  .details-btn {
+    padding: 10px 22px;
+    font-size: 13px;
+  }
+
+  .section {
+    margin-bottom: 32px;
+  }
+
+  .section-title {
+    font-size: 20px;
+  }
+
+  .section-link {
+    font-size: 14px;
+  }
+
+  .quick-actions-grid {
+    gap: 16px;
+  }
+
+  .quick-actions-grid ::ng-deep .quick-action-card {
+    padding: 24px 16px;
+    min-height: 104px;
+  }
+
+  .quick-actions-grid ::ng-deep .quick-action-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+  }
+
+  .quick-actions-grid ::ng-deep .quick-action-icon .material-icons {
+    font-size: 28px;
+  }
+
+  .quick-actions-grid ::ng-deep .quick-action-label {
+    font-size: 13px;
+  }
+
+  .monthly-summary-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .monthly-summary-grid ::ng-deep .stat-card {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    padding: 18px 20px;
+    min-height: 80px;
+  }
+
+  .monthly-summary-grid ::ng-deep .stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+  }
+
+  .monthly-summary-grid ::ng-deep .stat-icon .material-icons {
+    font-size: 24px;
+  }
+
+  .monthly-summary-grid ::ng-deep .stat-value {
+    font-size: 26px;
+  }
+
+  .monthly-summary-grid ::ng-deep .stat-label {
+    font-size: 12px;
+  }
+
+  .reservations-list ::ng-deep .reservation-item {
+    padding: 16px 18px;
+  }
+
+  .reservations-list ::ng-deep .reservation-item-image {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+  }
+
+  .reservations-list ::ng-deep .reservation-item-name {
+    font-size: 16px;
+  }
+
+  .reservations-list ::ng-deep .reservation-item-date,
+  .reservations-list ::ng-deep .reservation-item-time {
+    font-size: 13px;
+  }
+
+  .bottom-spacer {
+    display: none;
+  }
+}
+
+@media (min-width: 1440px) {
+  .dashboard {
+    padding: 40px 48px 0;
+  }
+
+  .next-reservation-image {
+    width: 280px;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dashboard-header {
+  animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.next-reservation {
+  animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
+}
+
+.quick-actions-section {
+  animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.16s both;
+}
+
+.monthly-summary-section {
+  animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.24s both;
+}
+
+.upcoming-section {
+  animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both;
+}
+
+.quick-actions-grid ::ng-deep app-quick-action-card:nth-child(1) { animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
+.quick-actions-grid ::ng-deep app-quick-action-card:nth-child(2) { animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both; }
+.quick-actions-grid ::ng-deep app-quick-action-card:nth-child(3) { animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both; }
+.quick-actions-grid ::ng-deep app-quick-action-card:nth-child(4) { animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both; }
+
+.monthly-summary-grid ::ng-deep app-stat-card:nth-child(1) { animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both; }
+.monthly-summary-grid ::ng-deep app-stat-card:nth-child(2) { animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both; }
+.monthly-summary-grid ::ng-deep app-stat-card:nth-child(3) { animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.36s both; }
+.monthly-summary-grid ::ng-deep app-stat-card:nth-child(4) { animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both; }
+
+.reservations-list ::ng-deep app-reservation-list-item:nth-child(1) { animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.36s both; }
+.reservations-list ::ng-deep app-reservation-list-item:nth-child(2) { animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both; }
+.reservations-list ::ng-deep app-reservation-list-item:nth-child(3) { animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.44s both; }

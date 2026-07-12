@@ -1,0 +1,26 @@
+$mobile: 768px;
+$tablet: 1024px;
+
+@mixin mobile-only {
+  @media (max-width: #{$mobile - 1px}) { @content; }
+}
+
+@mixin tablet-up {
+  @media (min-width: $mobile) { @content; }
+}
+
+@mixin desktop-up {
+  @media (min-width: $tablet) { @content; }
+}
+
+@mixin mobile-down {
+  @media (max-width: $mobile) { @content; }
+}
+
+@mixin responsive-grid($cols-desktop: 3, $cols-tablet: 2, $cols-mobile: 1) {
+  display: grid;
+  grid-template-columns: repeat($cols-mobile, 1fr);
+  gap: var(--space-4);
+  @include tablet-up { grid-template-columns: repeat($cols-tablet, 1fr); }
+  @include desktop-up { grid-template-columns: repeat($cols-desktop, 1fr); }
+}

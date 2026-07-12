@@ -1,0 +1,116 @@
+<div class="dashboard">
+  <!-- ===== HEADER ===== -->
+  <header class="dashboard-header">
+    <button class="header-btn menu-btn" aria-label="Menú" type="button">
+      <span class="material-icons">menu</span>
+    </button>
+
+    <div class="header-greeting">
+      <h1 class="greeting-title">¡Hola, {{ userName }}!</h1>
+      <p class="greeting-sub">Bienvenido a tu panel</p>
+    </div>
+
+    <div class="header-actions">
+      <button class="header-btn help-btn" aria-label="Ayuda" type="button">
+        <span class="material-icons">help_outline</span>
+      </button>
+      <button class="header-btn notif-btn" aria-label="Notificaciones" type="button">
+        <span class="material-icons">notifications</span>
+        <span class="notif-badge">3</span>
+      </button>
+      <div class="user-avatar" aria-label="Perfil">
+        <span>{{ userInitial }}</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== NEXT RESERVATION CARD ===== -->
+  <section class="next-reservation" aria-labelledby="next-res-title">
+    <div class="next-reservation-content" id="next-res-title">
+      <div class="next-res-header">
+        <span class="next-res-label">PRÓXIMA RESERVA</span>
+        <span class="next-res-badge">{{ nextReservation.ambienteNombre.split(' ')[0] }}</span>
+      </div>
+
+      <div class="next-res-details">
+        <div class="next-res-detail">
+          <span class="material-icons">calendar_today</span>
+          <span>{{ nextReservation.fecha }}</span>
+        </div>
+        <div class="next-res-detail">
+          <span class="material-icons">schedule</span>
+          <span>{{ nextReservation.horaInicio }} - {{ nextReservation.horaFin }}</span>
+        </div>
+        <div class="next-res-detail">
+          <span class="material-icons">location_on</span>
+          <span>{{ nextReservation.ambienteNombre }}</span>
+        </div>
+      </div>
+
+      <a class="details-btn" routerLink="/reservas">
+        Ver detalles
+        <span class="material-icons">arrow_forward</span>
+      </a>
+    </div>
+
+    <div class="next-reservation-image">
+      <img [src]="nextReservation.imagenUrl" [alt]="nextReservation.ambienteNombre" loading="lazy">
+    </div>
+  </section>
+
+  <!-- ===== QUICK ACTIONS ===== -->
+  <section class="section quick-actions-section" aria-labelledby="quick-actions-title">
+    <div class="section-header">
+      <h2 id="quick-actions-title" class="section-title">Acceso rápido</h2>
+    </div>
+
+    <div class="quick-actions-grid">
+      <app-quick-action-card
+        *ngFor="let action of quickActions"
+        [icon]="action.icon"
+        [label]="action.label"
+        [route]="action.route"
+        [color]="action.color">
+      </app-quick-action-card>
+    </div>
+  </section>
+
+  <!-- ===== MONTHLY SUMMARY ===== -->
+  <section class="section monthly-summary-section" aria-labelledby="monthly-summary-title">
+    <div class="section-header">
+      <h2 id="monthly-summary-title" class="section-title">Resumen del mes</h2>
+      <span class="section-badge">{{ today | date:'MMMM' }}</span>
+    </div>
+
+    <div class="monthly-summary-grid">
+      <app-stat-card
+        *ngFor="let stat of monthlyStats"
+        [icon]="stat.icon"
+        [value]="stat.value"
+        [label]="stat.label"
+        [color]="stat.color">
+      </app-stat-card>
+    </div>
+  </section>
+
+  <!-- ===== UPCOMING RESERVATIONS ===== -->
+  <section class="section upcoming-section" aria-labelledby="upcoming-title">
+    <div class="section-header">
+      <h2 id="upcoming-title" class="section-title">Próximas reservas</h2>
+      <a routerLink="/reservas" class="section-link">Ver todas</a>
+    </div>
+
+    <div class="reservations-list">
+      <app-reservation-list-item
+        *ngFor="let r of upcomingReservations"
+        [reservation]="r">
+      </app-reservation-list-item>
+    </div>
+  </section>
+
+  <!-- Bottom spacer for fixed bottom nav -->
+  <div class="bottom-spacer"></div>
+</div>
+
+<!-- ===== BOTTOM NAVIGATION ===== -->
+<app-bottom-nav activeRoute="dashboard"></app-bottom-nav>

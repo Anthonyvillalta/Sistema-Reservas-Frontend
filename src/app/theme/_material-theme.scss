@@ -1,0 +1,27 @@
+@use '@angular/material' as mat;
+
+$primary: mat.define-palette((
+  50: #EFF6FF,
+  100: #DBEAFE,
+  200: #BFDBFE,
+  300: #93C5FD,
+  400: #60A5FA,
+  500: #3B82F6,
+  600: #2563EB,
+  700: #1D4ED8,
+  800: #1E40AF,
+  900: #1E3A8A,
+  contrast: (50: #0F172A, 100: #0F172A, 200: #0F172A, 300: #0F172A, 400: #FFFFFF, 500: #FFFFFF, 600: #FFFFFF, 700: #FFFFFF, 800: #FFFFFF, 900: #FFFFFF)
+), 700, 600, 800);
+
+$accent: mat.define-palette(mat.$teal-palette, 600, 400, 700);
+$warn: mat.define-palette(mat.$red-palette, 500, 400, 700);
+
+$theme: mat.define-light-theme((
+  color: (primary: $primary, accent: $accent, warn: $warn),
+  typography: mat.define-typography-config($font-family: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif'),
+  density: 0,
+));
+
+@include mat.all-component-themes($theme);
+@include mat.typography-hierarchy($theme);
